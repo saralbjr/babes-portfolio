@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* CSS variables for light/dark themes (overridden by .dark on html) */
+:root {
+  /* Light theme */
+  --background: #ffffff;
+  --foreground: #0f172a; /* slate-900 */
+  --muted: #475569; /* slate-600 */
+  --accent: #4f46e5; /* indigo-600 */
+  --accent-foreground: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --border: #e2e8f0; /* slate-200 */
+}
+
+/* Dark mode toggled via class on <html> for consistency across systems */
+.dark {
+  /* Dark theme */
+  --background: #0b1020;
+  --foreground: #e6e8ee;
+  --muted: #9aa7c7;
+  --accent: #7c3aed; /* violet-600 */
+  --accent-foreground: #ffffff;
+  --card: #0f1629;
+  --card-foreground: #e6e8ee;
+  --border: #23314f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Utility layer augmentations */
+@utility container {
+  max-width: 72rem; /* ~1152px */
+  padding-inline: 1rem;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-[--color-accent] text-[--color-accent-foreground] hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[--color-accent];
+  }
+  .card {
+    @apply rounded-xl border border-[--color-border] bg-[--color-card] text-[--color-card-foreground] shadow-sm;
+  }
+  .section {
+    @apply py-20 md:py-28;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-semibold tracking-tight mb-8;
+  }
+}
